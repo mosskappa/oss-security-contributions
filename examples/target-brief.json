@@ -1,0 +1,18 @@
+{
+  "candidate_id": "SYNTH-2099-001",
+  "project": "example-build-tool",
+  "component": "artifact cache restore",
+  "mode": "deep_impact_review",
+  "status": "BOUNDARY_MODELED",
+  "authorization": "synthetic local lab",
+  "affected_version": "v0.0.0-example",
+  "disclosure_route": "private security advisory if reproduced in a real project",
+  "boundary_model": {
+    "lower_trust_actor": "untrusted pull request job",
+    "higher_trust_consumer": "protected release job",
+    "protected_boundary": "cache restored into release workspace",
+    "expected_postcondition": "release job consumes only trusted artifacts",
+    "observed_or_suspected_postcondition": "release job may consume attacker-controlled cache state"
+  },
+  "next_step": "build synthetic vulnerable and negative controls"
+}

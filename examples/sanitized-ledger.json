@@ -1,0 +1,17 @@
+[
+  {
+    "project": "example-parser",
+    "public_id": "CVE-2099-12345",
+    "role": "Reporter",
+    "summary": "Reported a published parser bounds-checking issue after coordinated disclosure.",
+    "evidence_url": "https://example.org/advisories/CVE-2099-12345"
+  },
+  {
+    "project": "example-container-tool",
+    "public_id": "example/example-container-tool#123",
+    "role": "Fix author",
+    "summary": "Authored a merged hardening change that validates archive paths before extraction.",
+    "evidence_url": "https://example.org/example/example-container-tool/pull/123"
+  }
+]
+

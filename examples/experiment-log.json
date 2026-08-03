@@ -1,0 +1,20 @@
+{
+  "candidate_id": "SYNTH-2099-001",
+  "project": "example-build-tool",
+  "component": "artifact cache restore",
+  "authorization": "synthetic local lab",
+  "tested_version": "v0.0.0-example",
+  "hypothesis": "a lower-trust cache producer can influence a higher-trust consumer",
+  "controls": {
+    "vulnerable_case": "synthetic marker appears in protected workflow output",
+    "negative_control": "marker is absent when cache key is isolated",
+    "fixed_control": "marker is rejected after scoped cache restore"
+  },
+  "claim_level": "PROVEN",
+  "status": "EVIDENCE_BUILT",
+  "public_handling": {
+    "safe_to_publish_summary": true,
+    "private_material_retained_elsewhere": false,
+    "public_evidence_url": ""
+  }
+}

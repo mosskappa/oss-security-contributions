@@ -1,0 +1,29 @@
+# Local state
+.env
+.env.*
+*.local
+*.secret
+*.token
+*.cookie
+*.sqlite
+*.sqlite-journal
+
+# Private research artifacts
+artifacts/
+audits/
+disclosures/
+downloads/
+logs/
+out_/
+programs/
+scratch/
+targets/
+tmp/
+.browser-profiles/
+.runtime/
+
+# Generated caches
+.pytest_cache/
+__pycache__/
+*.pyc
+

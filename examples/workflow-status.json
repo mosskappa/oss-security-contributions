@@ -1,0 +1,23 @@
+{
+  "project": "example-parser",
+  "component": "example image parser",
+  "authorization": "local synthetic test case",
+  "previous_state": "PATCH_VALIDATION",
+  "current_state": "PUBLIC_CREDIT_READY",
+  "phase": "PUBLIC_CREDIT_GATE",
+  "gates": {
+    "authorization": "PASS",
+    "boundary_model": "PASS",
+    "evidence": "PASS",
+    "maintainer_invariant": "PASS",
+    "prior_art": "PASS",
+    "hostile_review": "KEEP_WITH_CAUTION",
+    "report_quality": "PASS",
+    "maintainer_native_validation": "LEVEL_2_NATIVE_VALIDATION",
+    "disclosure_route": "SEND_PRIVATE_CONSERVATIVE",
+    "public_credit": "PUBLIC_CREDIT_READY"
+  },
+  "claim_level": "PROVEN",
+  "public_claim_level": "PROVEN",
+  "public_evidence_url": "https://example.org/advisories/CVE-2099-12345"
+}

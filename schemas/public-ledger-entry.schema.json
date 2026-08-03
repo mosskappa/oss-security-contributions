@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/osssec-public/public-ledger-entry.schema.json",
+  "title": "Public Ledger Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["project", "public_id", "role", "summary", "evidence_url"],
+  "properties": {
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "public_id": {
+      "type": "string",
+      "pattern": "^(CVE-[0-9]{4}-[0-9]{4,7}|GHSA-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}|[a-f0-9]{12,40}|[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+#[0-9]+)( / (CVE-[0-9]{4}-[0-9]{4,7}|GHSA-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}))*$"
+    },
+    "role": {
+      "type": "string",
+      "enum": ["Reporter", "Analyst", "Fix author", "Security contributor"]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 20
+    },
+    "evidence_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    }
+  }
+}
+

@@ -1,0 +1,16 @@
+{
+  "candidate_id": "SYNTH-2099-001",
+  "project": "example-build-tool",
+  "component": "artifact cache restore",
+  "current_state": "HOSTILE_REVIEWED",
+  "emergency_thesis": "An untrusted pull request job can make a protected release job consume attacker-controlled cache state in a documented cache restore workflow.",
+  "impact_marker": "TRUSTED_ARTIFACT_MUTATION",
+  "claim_level": "PROVEN",
+  "maintainer_objection": "maintainers may say the cache producer is trusted by design",
+  "capability_closure": {
+    "current_proven_capability": "trusted artifact mutation in a synthetic local workflow",
+    "plausible_unproven_capability": "credential exposure from a real release pipeline",
+    "blocked_routes": ["real third-party CI tokens are not used in public validation"]
+  },
+  "decision": "CONTINUE_TO_REPORT"
+}
