@@ -19,6 +19,10 @@ workflow and deliberately excludes sensitive operational automation.
 | Public-safe target leasing | Yes | Yes |
 | Session close / final handoff gates | Yes | Yes |
 | Public package hygiene checking | Yes | Yes |
+| One-command workspace start | Yes | Partial |
+| Next-action guidance | Yes | Partial |
+| Whole-workspace validation | Yes | Partial |
+| Repository doctor / demo | Yes | No |
 | Start-mode selection gate | Yes | Yes |
 | Reproducer-readiness shape gate | Yes | Yes |
 | Hostile reviewer marker validation | Yes | Yes |
@@ -72,6 +76,9 @@ python -m tools.osssec_public.cli package-hygiene examples/public-package
 python -m tools.osssec_public.cli advanced-gate reproducer-ready examples/reproducer-ready.json
 python -m tools.osssec_public.cli advanced-gate hostile-review examples/hostile-review.json
 python -m tools.osssec_public.cli advanced-gate long-run-final examples/long-run-final.json
+osssec-public start scratch/SYNTH-001 --candidate-id SYNTH-001 --project example --component component
+osssec-public next scratch/SYNTH-001
+osssec-public validate scratch/SYNTH-001
 ```
 
 This is enough for a public-safe research control plane. It is not enough to run

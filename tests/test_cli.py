@@ -53,3 +53,25 @@ def test_cli_session_handoff_and_package_pass():
 def test_cli_advanced_gate_passes():
     assert main(["advanced-gate", "reproducer-ready", "examples/reproducer-ready.json"]) == 0
     assert main(["advanced-gate", "long-run-final", "examples/long-run-final.json"]) == 0
+
+
+def test_cli_start_next_validate_doctor_demo(tmp_path):
+    path = tmp_path / "SYNTH-CLI-UX"
+    assert main(
+        [
+            "start",
+            str(path),
+            "--candidate-id",
+            "SYNTH-CLI-UX",
+            "--project",
+            "example",
+            "--component",
+            "component",
+            "--mode",
+            "deep_impact_review",
+        ]
+    ) == 0
+    assert main(["next", str(path)]) == 0
+    assert main(["validate", str(path)]) == 0
+    assert main(["doctor"]) == 0
+    assert main(["demo"]) == 0

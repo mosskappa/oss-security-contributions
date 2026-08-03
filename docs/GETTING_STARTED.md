@@ -5,7 +5,43 @@ It uses synthetic or generic candidates only. Do not put private reports,
 target-specific proof material, credentials, browser state, or coordinated
 disclosure correspondence in this repository.
 
-## 1. Run The Baseline Checks
+## 1. Use The Fast Path
+
+Install the CLI locally:
+
+```bash
+python -m pip install -e .
+```
+
+Start a complete public-safe workflow workspace:
+
+```bash
+osssec-public start scratch/SYNTH-001 --candidate-id SYNTH-001 --project example-project --component example-component --mode deep_impact_review
+```
+
+Ask for the next action:
+
+```bash
+osssec-public next scratch/SYNTH-001
+```
+
+Validate the whole workspace:
+
+```bash
+osssec-public validate scratch/SYNTH-001
+```
+
+Check repository health and run the bundled demo:
+
+```bash
+osssec-public doctor
+osssec-public demo
+```
+
+This is the easiest way to use the project. The lower-level commands below are
+available when you want to inspect or validate individual gates.
+
+## 2. Run The Baseline Checks
 
 ```bash
 python scripts/validate_public_repo.py
@@ -16,7 +52,7 @@ The first command runs the public-safety, ledger, evidence, workflow, gate,
 registry, handoff, package, and Markdown checks. The second command runs the
 test suite.
 
-## 2. Start Or Validate A Candidate Registry
+## 3. Start Or Validate A Candidate Registry
 
 Use the example registry first:
 
@@ -39,7 +75,7 @@ Release the claim when the local session is done:
 python -m tools.osssec_public.cli release scratch/registry.json SYNTH-NEW-001 --owner local-session
 ```
 
-## 3. Write The Core Gate Records
+## 4. Write The Core Gate Records
 
 Validate the included examples:
 
@@ -55,7 +91,7 @@ Create a new scaffold in ignored local space:
 python -m tools.osssec_public.cli scaffold target-brief scratch/target-brief.json --candidate-id SYNTH-NEW-001 --project example-project --component example-component
 ```
 
-## 4. Run Advanced Workflow Gates
+## 5. Run Advanced Workflow Gates
 
 These gates model the stricter parts of the private workflow without publishing
 private operational material.
@@ -72,7 +108,7 @@ Use `reproducer-ready` for validation shape only. It checks controls, expected
 markers, cleanup, run-id handling, and non-claims. It does not execute private
 proof material.
 
-## 5. Close A Session
+## 6. Close A Session
 
 Before calling work done, validate the close record and final handoff:
 
@@ -84,7 +120,7 @@ python -m tools.osssec_public.cli handoff examples/final-handoff.md
 A good close record names work completed, evidence, decisions, tests, claim
 boundaries, blockers, state changes, and the next concrete step.
 
-## 6. Check A Public Package
+## 7. Check A Public Package
 
 Public packages should be small, text-based, and explicit about what is excluded.
 
@@ -96,7 +132,7 @@ python -m tools.osssec_public.cli advanced-gate disclosure-manifest examples/pub
 The package checks are guardrails. Manual disclosure review is still required
 before anything is sent or published.
 
-## 7. Safe Publication Rule
+## 8. Safe Publication Rule
 
 Before committing public changes:
 

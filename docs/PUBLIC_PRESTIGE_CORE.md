@@ -40,6 +40,17 @@ automation.
 
 ## Recommended Use Flow
 
+Fast path:
+
+```bash
+osssec-public start scratch/SYNTH-001 --candidate-id SYNTH-001 --project example --component component --mode stable_credit
+osssec-public next scratch/SYNTH-001
+osssec-public validate scratch/SYNTH-001
+osssec-public doctor
+```
+
+Detailed flow:
+
 1. Validate the repository with `python scripts/validate_public_repo.py`.
 2. Add or validate a candidate registry with `public-core`.
 3. Claim one candidate before working on it.

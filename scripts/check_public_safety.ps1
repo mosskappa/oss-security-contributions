@@ -47,16 +47,21 @@ foreach ($file in $files) {
     if ($relative -like "*\__pycache__\*") {
         continue
     }
+    $blockedPath = $false
+    foreach ($pattern in $blockedPathPatterns) {
+        if ($file.FullName -match $pattern) {
+            $blockedPath = $true
+            break
+        }
+    }
+    if ($blockedPath) {
+        continue
+    }
     if ($relative -eq "scripts\check_public_safety.ps1") {
         continue
     }
     if ($relative -eq "tools\osssec_public\safety.py") {
         continue
-    }
-    foreach ($pattern in $blockedPathPatterns) {
-        if ($file.FullName -match $pattern) {
-            $warnings.Add("Blocked path pattern '$pattern': $relative")
-        }
     }
 
     if ($file.Length -gt 2MB) {

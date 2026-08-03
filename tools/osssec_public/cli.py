@@ -19,6 +19,7 @@ from . import (
     safety,
     state_machine,
     workflow,
+    workspace,
 )
 
 
@@ -155,6 +156,51 @@ def cmd_advanced_gate(args: argparse.Namespace) -> int:
     path = Path(args.path).resolve()
     warnings = advanced_gates.validate_file(args.kind, path)
     return _print_warnings(f"{args.kind} validation", warnings)
+
+
+def _print_workspace_results(results: list[workspace.CheckResult]) -> int:
+    failed = 0
+    for result in results:
+        failed |= _print_warnings(result.name, result.warnings)
+    return failed
+
+
+def cmd_start(args: argparse.Namespace) -> int:
+    root = Path(args.path).resolve()
+    workspace.create_workspace(
+        root,
+        candidate_id=args.candidate_id,
+        project=args.project,
+        component=args.component,
+        mode=args.mode,
+        force=args.force,
+    )
+    print(f"Created public-safe workflow workspace: {root}")
+    print(f"Next: osssec-public next {root}")
+    return 0
+
+
+def cmd_next(args: argparse.Namespace) -> int:
+    root = Path(args.path).resolve()
+    print(json.dumps(workspace.next_action(root), indent=2))
+    return 0
+
+
+def cmd_validate_workspace(args: argparse.Namespace) -> int:
+    root = Path(args.path).resolve()
+    return _print_workspace_results(workspace.validate_workspace(root))
+
+
+def cmd_doctor(args: argparse.Namespace) -> int:
+    root = Path(args.root).resolve()
+    return _print_workspace_results(workspace.doctor(root))
+
+
+def cmd_demo(args: argparse.Namespace) -> int:
+    failed = _print_workspace_results(workspace.validate_bundled_examples(repo_root()))
+    if failed == 0:
+        print("Demo workflow passed. Try: osssec-public start scratch/SYNTH-001 --candidate-id SYNTH-001 --project example --component component")
+    return failed
 
 
 def cmd_check(args: argparse.Namespace) -> int:
@@ -357,6 +403,30 @@ def build_parser() -> argparse.ArgumentParser:
     )
     advanced_parser.add_argument("path")
     advanced_parser.set_defaults(func=cmd_advanced_gate)
+
+    start_parser = subparsers.add_parser("start", help="create a full public-safe workflow workspace")
+    start_parser.add_argument("path")
+    start_parser.add_argument("--candidate-id", default="SYNTH-NEW-001")
+    start_parser.add_argument("--project", required=True)
+    start_parser.add_argument("--component", required=True)
+    start_parser.add_argument("--mode", choices=sorted(core.MODES), default="stable_credit")
+    start_parser.add_argument("--force", action="store_true", help="overwrite files in an existing workspace")
+    start_parser.set_defaults(func=cmd_start)
+
+    next_parser = subparsers.add_parser("next", help="show the next action for a public-safe workspace")
+    next_parser.add_argument("path")
+    next_parser.set_defaults(func=cmd_next)
+
+    validate_parser = subparsers.add_parser("validate", help="validate a public-safe workflow workspace")
+    validate_parser.add_argument("path")
+    validate_parser.set_defaults(func=cmd_validate_workspace)
+
+    doctor_parser = subparsers.add_parser("doctor", help="check repository health and example workspace")
+    doctor_parser.add_argument("root", nargs="?", default=str(repo_root()))
+    doctor_parser.set_defaults(func=cmd_doctor)
+
+    demo_parser = subparsers.add_parser("demo", help="run the bundled public-safe workflow demo")
+    demo_parser.set_defaults(func=cmd_demo)
 
     check_parser = subparsers.add_parser("check", help="run all public-readiness checks")
     check_parser.add_argument("root", nargs="?", default=str(repo_root()))

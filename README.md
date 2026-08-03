@@ -36,6 +36,17 @@ checks, templates, and examples for maintainer-friendly security workflows.
 
 New users should start with [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md).
 
+Fast path:
+
+```bash
+python -m pip install -e .
+osssec-public start scratch/SYNTH-001 --candidate-id SYNTH-001 --project example-project --component example-component --mode deep_impact_review
+osssec-public next scratch/SYNTH-001
+osssec-public validate scratch/SYNTH-001
+osssec-public doctor
+osssec-public demo
+```
+
 Run every check:
 
 ```bash
@@ -58,6 +69,8 @@ python -m tools.osssec_public.cli session-close examples/session-close.json
 python -m tools.osssec_public.cli handoff examples/final-handoff.md
 python -m tools.osssec_public.cli package-hygiene examples/public-package
 python -m tools.osssec_public.cli advanced-gate reproducer-ready examples/reproducer-ready.json
+python -m tools.osssec_public.cli start scratch/SYNTH-001 --candidate-id SYNTH-001 --project example --component component
+python -m tools.osssec_public.cli validate scratch/SYNTH-001
 ```
 
 Run tests:

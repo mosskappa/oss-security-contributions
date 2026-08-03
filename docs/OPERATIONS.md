@@ -11,6 +11,18 @@ templates and checks in this repository.
 | Deep impact review | Test whether a signal reaches a stronger boundary or concrete capability. | Maximum-form decision: upgrade, bank, downgrade, or no-go. |
 | Maintenance follow-up | Support maintainers after a report, patch, advisory, or PR is in motion. | Verified fix, clarified report, or public-safe ledger update. |
 
+## Preferred UX
+
+Most users should begin with the high-level workflow commands:
+
+```bash
+osssec-public start scratch/SYNTH-001 --candidate-id SYNTH-001 --project example --component component
+osssec-public next scratch/SYNTH-001
+osssec-public validate scratch/SYNTH-001
+```
+
+The lower-level gate commands are still available for detailed inspection.
+
 ## Anti-Sprawl Rules
 
 - Every candidate needs one current status record.

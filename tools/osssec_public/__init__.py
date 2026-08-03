@@ -13,4 +13,5 @@ __all__ = [
     "safety",
     "state_machine",
     "workflow",
+    "workspace",
 ]
