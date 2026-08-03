@@ -48,3 +48,8 @@ def test_cli_session_handoff_and_package_pass():
     assert main(["session-close", "examples/session-close.json"]) == 0
     assert main(["handoff", "examples/final-handoff.md"]) == 0
     assert main(["package-hygiene", "examples/public-package"]) == 0
+
+
+def test_cli_advanced_gate_passes():
+    assert main(["advanced-gate", "reproducer-ready", "examples/reproducer-ready.json"]) == 0
+    assert main(["advanced-gate", "long-run-final", "examples/long-run-final.json"]) == 0

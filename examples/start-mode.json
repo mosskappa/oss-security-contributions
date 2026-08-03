@@ -1,0 +1,6 @@
+{
+  "requested_mode": "ambiguous",
+  "chosen_mode": "stable_credit",
+  "reason": "Default to stable credit when a public-safe workflow starts without an explicit mode.",
+  "next_action": "initialize or claim a candidate, then write the boundary model"
+}

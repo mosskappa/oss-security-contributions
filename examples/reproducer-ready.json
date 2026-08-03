@@ -1,0 +1,23 @@
+{
+  "candidate_id": "SYNTH-CORE-001",
+  "authorization": "synthetic local lab",
+  "validation_level": "LEVEL_2_NATIVE_VALIDATION",
+  "command_summary": "project-native synthetic validation command shape; exact private commands are not published",
+  "controls": {
+    "affected_case": "synthetic marker appears in the affected flow",
+    "negative_control": "marker is absent when the boundary is not crossed",
+    "fixed_control": "marker is rejected after the synthetic fix"
+  },
+  "expected_markers": [
+    "SYNTHETIC_BOUNDARY_MARKER",
+    "NEGATIVE_CONTROL_CLEAN",
+    "FIXED_CONTROL_CLEAN"
+  ],
+  "cleanup": "synthetic workspace removal only",
+  "run_id_policy": "synthetic run identifiers are allowed; private run identifiers stay outside the public repository",
+  "non_claims": [
+    "no real vulnerability is claimed",
+    "no target-specific proof material is included",
+    "no third-party system is tested"
+  ]
+}

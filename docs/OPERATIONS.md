@@ -57,6 +57,14 @@ python -m tools.osssec_public.cli session-close examples/session-close.json
 python -m tools.osssec_public.cli handoff examples/final-handoff.md
 ```
 
+Advanced gate commands:
+
+```bash
+python -m tools.osssec_public.cli advanced-gate reproducer-ready examples/reproducer-ready.json
+python -m tools.osssec_public.cli advanced-gate hostile-review examples/hostile-review.json
+python -m tools.osssec_public.cli advanced-gate long-run-final examples/long-run-final.json
+```
+
 ## External Action Boundaries
 
 The workflow can prepare reports, summaries, and validation material, but these

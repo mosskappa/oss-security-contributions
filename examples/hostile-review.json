@@ -1,0 +1,25 @@
+{
+  "candidate_id": "SYNTH-CORE-001",
+  "reviewer_mode": "maintainer_objection",
+  "maintainer_objections": [
+    "The behavior may be expected design unless the boundary promise is documented.",
+    "The synthetic marker does not prove impact in a real project."
+  ],
+  "claim_boundaries": {
+    "proven": [
+      "the public-safe candidate has a written boundary model"
+    ],
+    "plausible_not_proven": [
+      "a real project may have a similar cache-consumption issue"
+    ],
+    "do_not_claim": [
+      "no real affected project, CVE, or production impact"
+    ]
+  },
+  "prior_art_status": "synthetic example; no novelty claim",
+  "max_form_decision": "REPAIR_BEFORE_REPORT",
+  "verdict": "REPAIR",
+  "repair_items": [
+    "build synthetic evidence controls before any report-ready claim"
+  ]
+}

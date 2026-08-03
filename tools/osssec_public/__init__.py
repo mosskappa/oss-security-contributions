@@ -2,6 +2,7 @@
 
 __all__ = [
     "cli",
+    "advanced_gates",
     "core",
     "evidence",
     "gate_records",

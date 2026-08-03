@@ -17,6 +17,12 @@ automation.
 | Session-close validation | `python -m tools.osssec_public.cli session-close examples/session-close.json` |
 | Final handoff validation | `python -m tools.osssec_public.cli handoff examples/final-handoff.md` |
 | Public package hygiene | `python -m tools.osssec_public.cli package-hygiene examples/public-package` |
+| Start-mode validation | `python -m tools.osssec_public.cli advanced-gate start-mode examples/start-mode.json` |
+| Reproducer-readiness shape | `python -m tools.osssec_public.cli advanced-gate reproducer-ready examples/reproducer-ready.json` |
+| Hostile reviewer gate | `python -m tools.osssec_public.cli advanced-gate hostile-review examples/hostile-review.json` |
+| Long-run final gate | `python -m tools.osssec_public.cli advanced-gate long-run-final examples/long-run-final.json` |
+| Disclosure manifest gate | `python -m tools.osssec_public.cli advanced-gate disclosure-manifest examples/public-package/disclosure-manifest.json` |
+| Synthetic lab manifest | `python -m tools.osssec_public.cli advanced-gate synthetic-lab examples/synthetic-lab/manifest.json` |
 
 ## What This Adds
 
@@ -28,6 +34,21 @@ automation.
   boundaries, and a concrete next step;
 - final handoff validation that prevents incomplete "done" messages;
 - package hygiene checks for public-safe report bundles.
+- advanced workflow checks for mode selection, validation-readiness shape,
+  hostile review, long-run final handoff, disclosure manifests, and synthetic
+  lab manifests.
+
+## Recommended Use Flow
+
+1. Validate the repository with `python scripts/validate_public_repo.py`.
+2. Add or validate a candidate registry with `public-core`.
+3. Claim one candidate before working on it.
+4. Fill target, experiment, and maximum-form records.
+5. Run advanced gates before any handoff or public package.
+6. Validate session close and final handoff.
+7. Run package hygiene and public-safety checks before publication.
+
+See `docs/GETTING_STARTED.md` for a copy-paste walkthrough.
 
 ## What Still Stays Private
 

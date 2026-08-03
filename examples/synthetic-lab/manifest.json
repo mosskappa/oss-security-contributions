@@ -1,0 +1,25 @@
+{
+  "lab_id": "SYNTH-LAB-001",
+  "scope": "synthetic_only",
+  "external_network": false,
+  "third_party_targets": false,
+  "destructive_actions": false,
+  "scenarios": [
+    {
+      "name": "cache boundary toy model",
+      "actor": "synthetic lower-trust producer",
+      "consumer": "synthetic higher-trust consumer",
+      "boundary": "cache materialization boundary",
+      "controls": {
+        "affected_case": "marker appears",
+        "negative_control": "marker absent",
+        "fixed_control": "marker rejected"
+      }
+    }
+  ],
+  "success_markers": [
+    "SYNTHETIC_ONLY",
+    "NO_EXTERNAL_NETWORK",
+    "NO_REAL_TARGETS"
+  ]
+}

@@ -9,6 +9,7 @@ import sys
 
 from . import (
     core,
+    advanced_gates,
     evidence,
     gate_records,
     handoff,
@@ -150,6 +151,12 @@ def cmd_package_hygiene(args: argparse.Namespace) -> int:
     return _print_warnings("Package hygiene validation", warnings)
 
 
+def cmd_advanced_gate(args: argparse.Namespace) -> int:
+    path = Path(args.path).resolve()
+    warnings = advanced_gates.validate_file(args.kind, path)
+    return _print_warnings(f"{args.kind} validation", warnings)
+
+
 def cmd_check(args: argparse.Namespace) -> int:
     root = Path(args.root).resolve()
     checks = [
@@ -199,6 +206,32 @@ def cmd_check(args: argparse.Namespace) -> int:
         (
             "Package hygiene validation",
             package_hygiene.validate_package([root / "examples" / "public-package"]),
+        ),
+        (
+            "Start-mode validation",
+            advanced_gates.validate_file("start-mode", root / "examples" / "start-mode.json"),
+        ),
+        (
+            "Reproducer-ready validation",
+            advanced_gates.validate_file("reproducer-ready", root / "examples" / "reproducer-ready.json"),
+        ),
+        (
+            "Hostile-review validation",
+            advanced_gates.validate_file("hostile-review", root / "examples" / "hostile-review.json"),
+        ),
+        (
+            "Long-run final validation",
+            advanced_gates.validate_file("long-run-final", root / "examples" / "long-run-final.json"),
+        ),
+        (
+            "Disclosure-manifest validation",
+            advanced_gates.validate_file(
+                "disclosure-manifest", root / "examples" / "public-package" / "disclosure-manifest.json"
+            ),
+        ),
+        (
+            "Synthetic-lab validation",
+            advanced_gates.validate_file("synthetic-lab", root / "examples" / "synthetic-lab" / "manifest.json"),
         ),
         ("Markdown disclosure policy", markdown_policy.scan_markdown_tree(root)),
     ]
@@ -309,6 +342,21 @@ def build_parser() -> argparse.ArgumentParser:
     package_parser = subparsers.add_parser("package-hygiene", help="validate public report package hygiene")
     package_parser.add_argument("paths", nargs="+")
     package_parser.set_defaults(func=cmd_package_hygiene)
+
+    advanced_parser = subparsers.add_parser("advanced-gate", help="validate an advanced public-safe workflow gate")
+    advanced_parser.add_argument(
+        "kind",
+        choices=[
+            "start-mode",
+            "reproducer-ready",
+            "hostile-review",
+            "long-run-final",
+            "disclosure-manifest",
+            "synthetic-lab",
+        ],
+    )
+    advanced_parser.add_argument("path")
+    advanced_parser.set_defaults(func=cmd_advanced_gate)
 
     check_parser = subparsers.add_parser("check", help="run all public-readiness checks")
     check_parser.add_argument("root", nargs="?", default=str(repo_root()))

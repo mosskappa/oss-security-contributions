@@ -1,0 +1,26 @@
+{
+  "package_id": "SYNTH-PACKAGE-001",
+  "route": "PUBLIC_HARDENING_ONLY",
+  "files": [
+    {
+      "path": "report.md",
+      "purpose": "synthetic public-safe report body",
+      "public_safe": true
+    },
+    {
+      "path": "public-boundaries.md",
+      "purpose": "public handling boundaries",
+      "public_safe": true
+    }
+  ],
+  "excluded_material": [
+    "private reports",
+    "target-specific proof material",
+    "credentials or session data",
+    "vendor correspondence"
+  ],
+  "approval_required": [
+    "user approval before external submission",
+    "maintainer approval before publishing non-public vulnerability details"
+  ]
+}

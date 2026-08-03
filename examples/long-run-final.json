@@ -1,0 +1,34 @@
+{
+  "mode": "deep_impact_review",
+  "candidate_id": "SYNTH-CORE-001",
+  "terminal_reason": "ROUND_EXHAUSTED_WITH_NEXT_SCOPE",
+  "stop_allowed": true,
+  "frontier_closure": {
+    "current_tier": "boundary model only",
+    "next_plausible_tier": "synthetic evidence with affected, negative, and fixed controls",
+    "routes_closed": [
+      "real-project testing is outside this public example"
+    ],
+    "why_no_more_now": "the next step requires building a synthetic validation fixture"
+  },
+  "claim_boundaries": {
+    "proven": [
+      "public-safe control-plane artifacts validate"
+    ],
+    "plausible_not_proven": [
+      "real-world impact"
+    ],
+    "do_not_claim": [
+      "no real vulnerability or private report"
+    ]
+  },
+  "tests_run": [
+    "python -m tools.osssec_public.cli check"
+  ],
+  "tests_blocked": [],
+  "files_updated": [
+    "examples/public-core-registry.json",
+    "examples/session-close.json"
+  ],
+  "next_action": "build a synthetic validation fixture and rerun reproducer-ready validation"
+}

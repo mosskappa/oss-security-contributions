@@ -19,6 +19,11 @@ workflow and deliberately excludes sensitive operational automation.
 | Public-safe target leasing | Yes | Yes |
 | Session close / final handoff gates | Yes | Yes |
 | Public package hygiene checking | Yes | Yes |
+| Start-mode selection gate | Yes | Yes |
+| Reproducer-readiness shape gate | Yes | Yes |
+| Hostile reviewer marker validation | Yes | Yes |
+| Long-run final stop validation | Yes | Yes |
+| Synthetic lab manifest validation | Yes | Partial |
 | Hostile review templates | Yes | Yes |
 | Maintainer-native validation templates | Yes | Yes |
 | Private target registry with live target state | No | Yes |
@@ -64,7 +69,10 @@ python -m tools.osssec_public.cli claim scratch/registry.json SYNTH-NEW-001 --ow
 python -m tools.osssec_public.cli session-close examples/session-close.json
 python -m tools.osssec_public.cli handoff examples/final-handoff.md
 python -m tools.osssec_public.cli package-hygiene examples/public-package
+python -m tools.osssec_public.cli advanced-gate reproducer-ready examples/reproducer-ready.json
+python -m tools.osssec_public.cli advanced-gate hostile-review examples/hostile-review.json
+python -m tools.osssec_public.cli advanced-gate long-run-final examples/long-run-final.json
 ```
 
-This is enough for a public toolkit. It is not enough to run private deep
-research by itself, and that limitation is intentional.
+This is enough for a public-safe research control plane. It is not enough to run
+private deep research by itself, and that limitation is intentional.

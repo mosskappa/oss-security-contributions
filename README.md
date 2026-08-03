@@ -26,10 +26,15 @@ checks, templates, and examples for maintainer-friendly security workflows.
 - Public-safe PRESTIGE Core features: generic candidate registry, claim leases,
   status summaries, session-close gates, final handoff gates, and package
   hygiene checks.
+- Advanced public-safe gates for start-mode selection, reproducer-readiness
+  shape, hostile review, long-run final handoff, disclosure manifests, and
+  synthetic lab manifests.
 - Synthetic examples and templates for safe maintainer-facing workflows.
 - Tests and GitHub Actions workflow for repeatable public-readiness checks.
 
 ## Quick Start
+
+New users should start with [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md).
 
 Run every check:
 
@@ -52,6 +57,7 @@ python -m tools.osssec_public.cli status examples/public-core-registry.json
 python -m tools.osssec_public.cli session-close examples/session-close.json
 python -m tools.osssec_public.cli handoff examples/final-handoff.md
 python -m tools.osssec_public.cli package-hygiene examples/public-package
+python -m tools.osssec_public.cli advanced-gate reproducer-ready examples/reproducer-ready.json
 ```
 
 Run tests:
@@ -111,6 +117,8 @@ See [docs/CREDIT_LEDGER.md](docs/CREDIT_LEDGER.md) for the public-safe ledger.
 - `docs/CAPABILITY_MATRIX.md` - what this public toolkit can do, and what
   deliberately stays private.
 - `docs/PUBLIC_PRESTIGE_CORE.md` - public-safe research control-plane commands.
+- `docs/GETTING_STARTED.md` - step-by-step usage guide for the public-safe
+  workflow.
 - `docs/WORKFLOW.md` - full public-safe research-to-disclosure workflow.
 - `docs/GATES.md` - compact gate catalog and decision vocabulary.
 - `docs/STATE_MACHINE.md` - status vocabulary and allowed transitions.
@@ -151,6 +159,8 @@ python -m tools.osssec_public.cli public-core examples/public-core-registry.json
 python -m tools.osssec_public.cli session-close examples/session-close.json
 python -m tools.osssec_public.cli handoff examples/final-handoff.md
 python -m tools.osssec_public.cli package-hygiene examples/public-package
+python -m tools.osssec_public.cli advanced-gate hostile-review examples/hostile-review.json
+python -m tools.osssec_public.cli advanced-gate disclosure-manifest examples/public-package/disclosure-manifest.json
 python -m tools.osssec_public.cli markdown-policy
 ```
 
