@@ -1,0 +1,65 @@
+{
+  "registry_version": 1,
+  "candidates": [
+    {
+      "candidate_id": "SYNTH-CORE-001",
+      "project": "example-build-tool",
+      "component": "artifact cache restore",
+      "mode": "deep_impact_review",
+      "status": "BOUNDARY_MODELED",
+      "priority": "P1",
+      "authorization": "synthetic local lab",
+      "boundary_model": {
+        "lower_trust_actor": "untrusted pull request job",
+        "higher_trust_consumer": "protected release job",
+        "protected_boundary": "cache restored into release workspace",
+        "expected_postcondition": "release job consumes only trusted artifacts",
+        "observed_or_suspected_postcondition": "release job may consume lower-trust cache state"
+      },
+      "gates": {
+        "authorization": "PASS",
+        "boundary_model": "PASS",
+        "evidence": "PENDING",
+        "maintainer_invariant": "PENDING",
+        "prior_art": "PENDING",
+        "hostile_review": "PENDING",
+        "maximum_form": "PENDING",
+        "report_quality": "PENDING",
+        "disclosure_route": "PENDING",
+        "public_credit": "PENDING"
+      },
+      "claim": null,
+      "next_step": "build synthetic vulnerable, negative, and fixed controls"
+    },
+    {
+      "candidate_id": "SYNTH-CORE-002",
+      "project": "example-parser",
+      "component": "metadata reader",
+      "mode": "stable_credit",
+      "status": "PRIOR_ART_REVIEWED",
+      "priority": "P2",
+      "authorization": "synthetic local lab",
+      "boundary_model": {
+        "lower_trust_actor": "untrusted metadata file",
+        "higher_trust_consumer": "indexing service",
+        "protected_boundary": "metadata-to-index conversion",
+        "expected_postcondition": "indexer records only normalized safe metadata",
+        "observed_or_suspected_postcondition": "indexer may preserve unexpected attacker-controlled state"
+      },
+      "gates": {
+        "authorization": "PASS",
+        "boundary_model": "PASS",
+        "evidence": "PASS",
+        "maintainer_invariant": "PASS",
+        "prior_art": "PASS",
+        "hostile_review": "PENDING",
+        "maximum_form": "PENDING",
+        "report_quality": "PENDING",
+        "disclosure_route": "PENDING",
+        "public_credit": "PENDING"
+      },
+      "claim": null,
+      "next_step": "run hostile review and downgrade overclaiming"
+    }
+  ]
+}

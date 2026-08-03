@@ -9,8 +9,9 @@ private targets, reports, logs, credentials, browser state, and exploit detail.
 
 | Private concept | Public-safe form in this repository |
 |---|---|
-| Target registry | Target brief template with synthetic examples only. |
-| Run state | Workflow status JSON and state-machine validation. |
+| Target registry | Public-safe candidate registry with synthetic examples and generic entries. |
+| Run state | Workflow status JSON, state-machine validation, and status summaries. |
+| Target claims | Short-lived public-safe claim leases for generic candidates. |
 | Experiment logs | Public experiment-log shape without real private commands or samples. |
 | Upgrade gate | Capability and claim-level review vocabulary. |
 | High-impact hard gate | Public maximum-form review that focuses on evidence, boundary, and downgrade rules. |
@@ -18,6 +19,8 @@ private targets, reports, logs, credentials, browser state, and exploit detail.
 | Reproducer-ready gate | Maintainer-native validation levels. |
 | Disclosure checklist | First-contact and route-selection templates. |
 | Patch validation | Patch-validation note and fixed-control language. |
+| Session close | Session-close JSON and final handoff validation. |
+| Report package hygiene | Public package hygiene checks for safe file types and disclosure boundaries. |
 | Public credit tracking | Public evidence ledger backed only by visible advisories, PRs, commits, or acknowledgements. |
 
 ## What Does Not Move
@@ -42,8 +45,10 @@ The goal is to prove research maturity without publishing unsafe material. A
 reviewer should be able to see that the contributor can:
 
 - choose targets by authorization, boundary, and maintainer route;
+- coordinate public-safe candidate work without colliding across sessions;
 - distinguish weak signals from report-ready findings;
 - challenge their own claims before sending them to maintainers;
+- close sessions with tests, claim boundaries, and a concrete next action;
 - provide useful validation while avoiding abuse-enabling publication;
 - update public credit only when public evidence supports the claim.
 

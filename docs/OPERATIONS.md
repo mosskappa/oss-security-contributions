@@ -14,6 +14,11 @@ templates and checks in this repository.
 ## Anti-Sprawl Rules
 
 - Every candidate needs one current status record.
+- Public-safe candidate queues live in registry JSON files and can be checked
+  with `python -m tools.osssec_public.cli public-core <registry>`.
+- When more than one session may work from the same public-safe registry, claim
+  a short-lived lease with `python -m tools.osssec_public.cli claim <registry>
+  <candidate-id> --owner <session>`.
 - Every meaningful experiment needs an evidence note or explicit no-go reason.
 - Every report candidate needs hostile review before maintainer contact.
 - Every public claim needs a public evidence link.
@@ -41,7 +46,16 @@ Close:
 - update state;
 - record the next concrete action;
 - note blockers and user-approval points;
+- validate session close and final handoff records when a session produces a
+  handoff;
 - keep public artifacts free of private material.
+
+Useful close commands:
+
+```bash
+python -m tools.osssec_public.cli session-close examples/session-close.json
+python -m tools.osssec_public.cli handoff examples/final-handoff.md
+```
 
 ## External Action Boundaries
 
@@ -60,3 +74,9 @@ actions require explicit user approval:
 Public evidence should answer "why is this contribution real?" without teaching
 "how to abuse this exact system." Prefer advisories, merged fixes, commit links,
 public acknowledgements, and sanitized validation summaries.
+
+Before publishing a public report package, run:
+
+```bash
+python -m tools.osssec_public.cli package-hygiene examples/public-package
+```

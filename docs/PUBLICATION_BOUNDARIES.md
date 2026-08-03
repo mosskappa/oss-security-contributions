@@ -36,6 +36,8 @@ Before publishing:
 - Keep proof material private unless maintainers explicitly request it through a
   responsible disclosure channel.
 - Run `scripts/check_public_safety.ps1`.
+- Run `python -m tools.osssec_public.cli package-hygiene <public-package>` for
+  public report packages.
 - Manually review every warning.
 
 ## Disclosure Philosophy

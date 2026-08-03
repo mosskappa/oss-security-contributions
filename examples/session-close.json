@@ -1,0 +1,36 @@
+{
+  "date": "2099-01-01",
+  "mode": "deep_impact_review",
+  "candidate_id": "SYNTH-CORE-001",
+  "current_state": "BOUNDARY_MODELED",
+  "work_completed": [
+    "Wrote target brief and boundary model",
+    "Identified required vulnerable, negative, and fixed controls"
+  ],
+  "evidence_or_artifacts": [
+    "examples/target-brief.json",
+    "examples/public-core-registry.json"
+  ],
+  "decisions": [
+    "Continue only in synthetic local lab until evidence gate passes"
+  ],
+  "state_changes": [
+    "INTAKE -> BOUNDARY_MODELED"
+  ],
+  "blockers": [],
+  "tests_run": [
+    "python -m tools.osssec_public.cli public-core examples/public-core-registry.json"
+  ],
+  "claim_boundaries": {
+    "proven": [
+      "public-safe boundary model exists"
+    ],
+    "plausible_not_proven": [
+      "real project impact"
+    ],
+    "do_not_claim": [
+      "no real vulnerability is claimed by this synthetic example"
+    ]
+  },
+  "next_concrete_step": "create synthetic experiment log and run evidence gate"
+}

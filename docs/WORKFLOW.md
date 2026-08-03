@@ -30,6 +30,13 @@ Stop if:
 
 Public artifact: `templates/TARGET_BRIEF.md`.
 
+Public control-plane support:
+
+```bash
+python -m tools.osssec_public.cli init-candidate scratch/registry.json SYNTH-NEW-001 --project example --component component
+python -m tools.osssec_public.cli public-core scratch/registry.json
+```
+
 ## Phase 1: Boundary Model
 
 Goal: write the issue as a precise boundary claim.
@@ -234,9 +241,26 @@ Decision:
 Every phase can downgrade the claim. Downgrading is not failure; it is how the
 workflow stays useful and trustworthy.
 
+## Public Core Controls
+
+The workflow is supported by a generic public-safe control plane:
+
+- `public-core`: validate candidate registry structure and gate state;
+- `status`: summarize current public-safe candidates;
+- `claim` / `release`: coordinate short-lived work leases;
+- `session-close`: require evidence, decisions, tests, boundaries, and next
+  action;
+- `handoff`: reject incomplete final handoff notes;
+- `package-hygiene`: check public report bundles before publication.
+
+These controls are intentionally generic. Real private target queues, exploit
+payloads, browser submission state, and coordinated-disclosure material remain
+outside this repository.
+
 See also:
 
 - `docs/STATE_MACHINE.md`
 - `docs/OPERATIONS.md`
 - `docs/MAXIMUM_FORM_REVIEW.md`
+- `docs/PUBLIC_PRESTIGE_CORE.md`
 - `docs/RESEARCH_WORKFLOW_MAPPING.md`

@@ -7,7 +7,18 @@ import json
 from pathlib import Path
 import sys
 
-from . import evidence, gate_records, ledger, markdown_policy, safety, state_machine, workflow
+from . import (
+    core,
+    evidence,
+    gate_records,
+    handoff,
+    ledger,
+    markdown_policy,
+    package_hygiene,
+    safety,
+    state_machine,
+    workflow,
+)
 
 
 def repo_root() -> Path:
@@ -83,6 +94,62 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_public_core(args: argparse.Namespace) -> int:
+    path = Path(args.path).resolve()
+    warnings = core.validate_registry_file(path)
+    return _print_warnings("Public core registry validation", warnings)
+
+
+def cmd_status(args: argparse.Namespace) -> int:
+    path = Path(args.path).resolve()
+    registry = core.load_json(path)
+    warnings = core.validate_registry(registry)
+    if warnings:
+        return _print_warnings("Public core registry validation", warnings)
+    print(json.dumps(core.summarize_registry(registry).as_dict(), indent=2))
+    return 0
+
+
+def cmd_init_candidate(args: argparse.Namespace) -> int:
+    path = Path(args.path).resolve()
+    candidate = core.scaffold_candidate(args.candidate_id, args.project, args.component, mode=args.mode)
+    registry = core.append_candidate(path, candidate)
+    print(f"Added {args.candidate_id} to {path}. Total candidates: {len(registry['candidates'])}")
+    return 0
+
+
+def cmd_claim(args: argparse.Namespace) -> int:
+    path = Path(args.path).resolve()
+    candidate = core.claim_candidate(path, args.candidate_id, args.owner, args.purpose, args.ttl_hours)
+    print(json.dumps({"candidate_id": candidate["candidate_id"], "claim": candidate["claim"]}, indent=2))
+    return 0
+
+
+def cmd_release(args: argparse.Namespace) -> int:
+    path = Path(args.path).resolve()
+    candidate = core.release_candidate(path, args.candidate_id, owner=args.owner)
+    print(f"Released claim for {candidate['candidate_id']}")
+    return 0
+
+
+def cmd_session_close(args: argparse.Namespace) -> int:
+    path = Path(args.path).resolve()
+    warnings = handoff.validate_session_close_file(path)
+    return _print_warnings("Session-close validation", warnings)
+
+
+def cmd_handoff(args: argparse.Namespace) -> int:
+    path = Path(args.path).resolve()
+    warnings = handoff.validate_final_handoff_file(path)
+    return _print_warnings("Final handoff validation", warnings)
+
+
+def cmd_package_hygiene(args: argparse.Namespace) -> int:
+    paths = [Path(path).resolve() for path in args.paths]
+    warnings = package_hygiene.validate_package(paths)
+    return _print_warnings("Package hygiene validation", warnings)
+
+
 def cmd_check(args: argparse.Namespace) -> int:
     root = Path(args.root).resolve()
     checks = [
@@ -116,6 +183,22 @@ def cmd_check(args: argparse.Namespace) -> int:
         (
             "Maximum-form validation",
             gate_records.validate_record_file("max-form", root / "examples" / "maximum-form-review.json"),
+        ),
+        (
+            "Public core registry validation",
+            core.validate_registry_file(root / "examples" / "public-core-registry.json"),
+        ),
+        (
+            "Session-close validation",
+            handoff.validate_session_close_file(root / "examples" / "session-close.json"),
+        ),
+        (
+            "Final handoff validation",
+            handoff.validate_final_handoff_file(root / "examples" / "final-handoff.md"),
+        ),
+        (
+            "Package hygiene validation",
+            package_hygiene.validate_package([root / "examples" / "public-package"]),
         ),
         ("Markdown disclosure policy", markdown_policy.scan_markdown_tree(root)),
     ]
@@ -184,6 +267,48 @@ def build_parser() -> argparse.ArgumentParser:
     scaffold_parser.add_argument("--component", default="example-component")
     scaffold_parser.add_argument("--force", action="store_true", help="overwrite an existing file")
     scaffold_parser.set_defaults(func=cmd_scaffold)
+
+    public_core_parser = subparsers.add_parser("public-core", help="validate a public-safe candidate registry")
+    public_core_parser.add_argument("path", nargs="?", default=str(repo_root() / "examples" / "public-core-registry.json"))
+    public_core_parser.set_defaults(func=cmd_public_core)
+
+    status_parser = subparsers.add_parser("status", help="summarize a public-safe candidate registry")
+    status_parser.add_argument("path", nargs="?", default=str(repo_root() / "examples" / "public-core-registry.json"))
+    status_parser.set_defaults(func=cmd_status)
+
+    init_parser = subparsers.add_parser("init-candidate", help="add a generic public-safe candidate")
+    init_parser.add_argument("path")
+    init_parser.add_argument("candidate_id")
+    init_parser.add_argument("--project", required=True)
+    init_parser.add_argument("--component", required=True)
+    init_parser.add_argument("--mode", choices=sorted(core.MODES), default="stable_credit")
+    init_parser.set_defaults(func=cmd_init_candidate)
+
+    claim_parser = subparsers.add_parser("claim", help="claim a public-safe candidate lease")
+    claim_parser.add_argument("path")
+    claim_parser.add_argument("candidate_id")
+    claim_parser.add_argument("--owner", required=True)
+    claim_parser.add_argument("--purpose", default="local public-safe review")
+    claim_parser.add_argument("--ttl-hours", type=float, default=4.0)
+    claim_parser.set_defaults(func=cmd_claim)
+
+    release_parser = subparsers.add_parser("release", help="release a public-safe candidate lease")
+    release_parser.add_argument("path")
+    release_parser.add_argument("candidate_id")
+    release_parser.add_argument("--owner")
+    release_parser.set_defaults(func=cmd_release)
+
+    session_close_parser = subparsers.add_parser("session-close", help="validate a session close record")
+    session_close_parser.add_argument("path", nargs="?", default=str(repo_root() / "examples" / "session-close.json"))
+    session_close_parser.set_defaults(func=cmd_session_close)
+
+    handoff_parser = subparsers.add_parser("handoff", help="validate a final handoff note")
+    handoff_parser.add_argument("path", nargs="?", default=str(repo_root() / "examples" / "final-handoff.md"))
+    handoff_parser.set_defaults(func=cmd_handoff)
+
+    package_parser = subparsers.add_parser("package-hygiene", help="validate public report package hygiene")
+    package_parser.add_argument("paths", nargs="+")
+    package_parser.set_defaults(func=cmd_package_hygiene)
 
     check_parser = subparsers.add_parser("check", help="run all public-readiness checks")
     check_parser.add_argument("root", nargs="?", default=str(repo_root()))

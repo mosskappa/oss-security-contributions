@@ -23,6 +23,9 @@ checks, templates, and examples for maintainer-friendly security workflows.
   readiness.
 - Gate-record validation and scaffolding for target briefs, experiment logs,
   and maximum-form reviews.
+- Public-safe PRESTIGE Core features: generic candidate registry, claim leases,
+  status summaries, session-close gates, final handoff gates, and package
+  hygiene checks.
 - Synthetic examples and templates for safe maintainer-facing workflows.
 - Tests and GitHub Actions workflow for repeatable public-readiness checks.
 
@@ -44,6 +47,11 @@ python -m tools.osssec_public.cli workflow
 python -m tools.osssec_public.cli state
 python -m tools.osssec_public.cli gate-record target-brief examples/target-brief.json
 python -m tools.osssec_public.cli scaffold max-form scratch/example-max-form.json
+python -m tools.osssec_public.cli public-core examples/public-core-registry.json
+python -m tools.osssec_public.cli status examples/public-core-registry.json
+python -m tools.osssec_public.cli session-close examples/session-close.json
+python -m tools.osssec_public.cli handoff examples/final-handoff.md
+python -m tools.osssec_public.cli package-hygiene examples/public-package
 ```
 
 Run tests:
@@ -102,6 +110,7 @@ See [docs/CREDIT_LEDGER.md](docs/CREDIT_LEDGER.md) for the public-safe ledger.
   are translated into public-safe artifacts.
 - `docs/CAPABILITY_MATRIX.md` - what this public toolkit can do, and what
   deliberately stays private.
+- `docs/PUBLIC_PRESTIGE_CORE.md` - public-safe research control-plane commands.
 - `docs/WORKFLOW.md` - full public-safe research-to-disclosure workflow.
 - `docs/GATES.md` - compact gate catalog and decision vocabulary.
 - `docs/STATE_MACHINE.md` - status vocabulary and allowed transitions.
@@ -114,7 +123,8 @@ See [docs/CREDIT_LEDGER.md](docs/CREDIT_LEDGER.md) for the public-safe ledger.
 - `schemas/` - schema for public ledger-style records.
 - `templates/` - reusable maintainer-support templates.
 - `tools/osssec_public/` - Python validators for the public ledger and safety
-  checks, workflow state, and public-safe gate records.
+  checks, workflow state, gate records, public-safe candidate registries,
+  session handoffs, and package hygiene.
 - `scripts/check_public_safety.ps1` - lightweight local safety scan before
   publishing.
 - `scripts/validate_public_repo.py` - cross-platform public-readiness checks.
@@ -137,6 +147,10 @@ python -m tools.osssec_public.cli workflow
 python -m tools.osssec_public.cli state
 python -m tools.osssec_public.cli gate-record experiment examples/experiment-log.json
 python -m tools.osssec_public.cli gate-record max-form examples/maximum-form-review.json
+python -m tools.osssec_public.cli public-core examples/public-core-registry.json
+python -m tools.osssec_public.cli session-close examples/session-close.json
+python -m tools.osssec_public.cli handoff examples/final-handoff.md
+python -m tools.osssec_public.cli package-hygiene examples/public-package
 python -m tools.osssec_public.cli markdown-policy
 ```
 

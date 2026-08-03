@@ -15,6 +15,10 @@ workflow and deliberately excludes sensitive operational automation.
 | Workflow and state-machine validation | Yes | Yes |
 | Target brief / experiment / maximum-form record validation | Yes | Yes |
 | Public-safe record scaffolding | Yes | Partial |
+| Generic candidate registry | Yes | Yes |
+| Public-safe target leasing | Yes | Yes |
+| Session close / final handoff gates | Yes | Yes |
+| Public package hygiene checking | Yes | Yes |
 | Hostile review templates | Yes | Yes |
 | Maintainer-native validation templates | Yes | Yes |
 | Private target registry with live target state | No | Yes |
@@ -54,6 +58,12 @@ python -m tools.osssec_public.cli gate-record target-brief examples/target-brief
 python -m tools.osssec_public.cli gate-record experiment examples/experiment-log.json
 python -m tools.osssec_public.cli gate-record max-form examples/maximum-form-review.json
 python -m tools.osssec_public.cli scaffold target-brief scratch/new-target.json
+python -m tools.osssec_public.cli public-core examples/public-core-registry.json
+python -m tools.osssec_public.cli status examples/public-core-registry.json
+python -m tools.osssec_public.cli claim scratch/registry.json SYNTH-NEW-001 --owner local-session
+python -m tools.osssec_public.cli session-close examples/session-close.json
+python -m tools.osssec_public.cli handoff examples/final-handoff.md
+python -m tools.osssec_public.cli package-hygiene examples/public-package
 ```
 
 This is enough for a public toolkit. It is not enough to run private deep
