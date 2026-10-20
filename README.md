@@ -9,6 +9,27 @@ open-source security work without publishing exploit material or private vendor
 correspondence. It combines a public CVE/GHSA contribution ledger with reusable
 checks, templates, and examples for maintainer-friendly security workflows.
 
+## Selected Engineering Contributions
+
+Public sources last reviewed: **2026-10-20**.
+
+| Project | Engineering work | Personal role and upstream status | Public evidence |
+|---|---|---|---|
+| ZenML | Resource-update authorization for single and batch tagging, bulk SQL resource lookup, and regression tests. | PR author; merged 2026-06-12 after maintainer review. | [PR #4927](https://github.com/zenml-io/zenml/pull/4927) |
+| Google go-containerregistry | OCI layout blob-read checks for symlinks, non-regular files, and file identity across open operations. | PR author; merged 2026-06-02 and included in v0.21.7. | [PR #2306](https://github.com/google/go-containerregistry/pull/2306), [release v0.21.7](https://github.com/google/go-containerregistry/releases/tag/v0.21.7) |
+| Linux kernel ksmbd | SID bounds validation during ACL inheritance and session-aware cleanup on durable-reconnect error paths. | Author of two upstream C fixes, associated with CVE-2026-64138 and CVE-2026-64016. | [SID validation commit](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=69f030cf95488ae1186c72ac8c66fd279664ea7f), [reconnect lifetime commit](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=3515503322f4819277091839eed46b695096aca5) |
+| fuse-overlayfs | Clearing SUID/SGID bits on truncate. | Fix author; incorporated with maintainer adjustments on 2026-06-09. The related advisory records an Analyst credit. | [Upstream commit](https://github.com/containers/fuse-overlayfs/commit/97e0d968a782fc259ebde112db1e9b9ff1ad724f), [CVE-2026-52791 advisory](https://github.com/containers/fuse-overlayfs/security/advisories/GHSA-2cc4-p72c-v85h) |
+
+The complete [credit ledger](docs/CREDIT_LEDGER.md) includes **14 published
+GitHub security advisories: 9 Reporter, 2 Finder, and 3 Analyst credits**, five
+GStreamer reporting acknowledgements, and additional maintainer credits from
+Pants and Dagger. Each role is recorded separately from patch authorship and
+downstream adoption. These are advisory-credit counts, not a count of independent
+discoveries.
+
+The [public evidence index](docs/PUBLIC_EVIDENCE_INDEX.md) links each claim to
+project advisories, upstream changes, or public acknowledgements.
+
 ## Features
 
 - CVE/GHSA and public-hardening contribution ledger.
@@ -108,17 +129,6 @@ The project is intentionally not an exploit archive. Public entries focus on
 what was responsibly disclosed or fixed, not on operational abuse steps. Private
 proof material belongs in maintainer-approved disclosure channels, not in this
 repository.
-
-## Highlights
-
-- Public reporter credits across libheif, pnpm, mise, GStreamer, ORAS Go, and
-  agentgateway.
-- Analyst or fix-validation contributions for container and filesystem-adjacent
-  projects including crun, fuse-overlayfs, and BuildKit.
-- Public security-hardening contribution to `google/go-containerregistry`.
-- Linux kernel `ksmbd` security-fix contributions with signed-off commits.
-
-See [docs/CREDIT_LEDGER.md](docs/CREDIT_LEDGER.md) for the public-safe ledger.
 
 ## Repository Layout
 
