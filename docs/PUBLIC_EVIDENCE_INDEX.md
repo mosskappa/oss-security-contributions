@@ -1,6 +1,6 @@
 # Contribution Sources
 
-Updated: **2026-10-20**.
+Updated: **2026-11-19**.
 
 Project advisories, pull requests, commits, and acknowledgements supporting the
 [contribution ledger](CREDIT_LEDGER.md).
@@ -53,6 +53,8 @@ underlying CVE. These five CVEs are separate from the 14 GHSA records above.
 | Linux kernel ksmbd SID validation | `69f030cf95488ae1186c72ac8c66fd279664ea7f` | https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=69f030cf95488ae1186c72ac8c66fd279664ea7f | Upstream signed-off commit identifies Junyi as author of the SID-validation fix. |
 | Linux kernel ksmbd reconnect lifetime | `3515503322f4819277091839eed46b695096aca5` | https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=3515503322f4819277091839eed46b695096aca5 | Upstream signed-off commit identifies Junyi as author of the durable-reconnect lifetime fix. |
 | Linux kernel ksmbd SID validation | `CVE-2026-64138` | https://kernel.googlesource.com/pub/scm/linux/security/vulns/+/532b7a5822a5879693dafb0e357333cf92f8271b/cve/published/2026/CVE-2026-64138.mbox | Linux CVE record links the SID-validation issue to its original upstream fix and stable backports. |
+| Linux kernel 6.6 stable | `6.6.160` (2026-10-21) | https://lists.openwall.net/linux-kernel/2026/10/21/903 | Greg Kroah-Hartman's stable release announcement lists Junyi Liu as author of the ksmbd SID-validation fix (CVE-2026-64138). |
+| Linux kernel 6.1 stable | `6.1.191` (2026-10-30) | https://lists.openwall.net/linux-kernel/2026/10/30/1507 | Greg Kroah-Hartman's stable release announcement lists Junyi Liu as author of the ksmbd SID-validation fix (CVE-2026-64138). |
 | Linux kernel ksmbd reconnect lifetime | `CVE-2026-64016` | https://kernel.googlesource.com/pub/scm/linux/security/vulns/+/532b7a5822a5879693dafb0e357333cf92f8271b/cve/published/2026/CVE-2026-64016.mbox | Linux CVE record links the reconnect lifetime issue to its original upstream fix and stable backports. |
 | Shipwright | `shipwright-io/website#228` | https://github.com/shipwright-io/website/issues/228 | Maintainer acknowledgement of the original security report in the project's hardening-guidance issue. |
 
