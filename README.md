@@ -8,13 +8,13 @@ contribution records and source links.
 
 ## Selected Engineering Contributions
 
-Updated: **2026-10-20**.
+Updated: **2026-11-19**.
 
 | Project | Engineering work | Role and status | Sources |
 |---|---|---|---|
 | ZenML | Resource-update authorization for single and batch tagging, bulk SQL resource lookup, and regression tests. | PR author; merged 2026-06-12 after maintainer review. | [PR #4927](https://github.com/zenml-io/zenml/pull/4927) |
 | Google go-containerregistry | OCI layout blob-read checks for symlinks, non-regular files, and file identity across open operations. | PR author; merged 2026-06-02 and included in v0.21.7. | [PR #2306](https://github.com/google/go-containerregistry/pull/2306), [release v0.21.7](https://github.com/google/go-containerregistry/releases/tag/v0.21.7) |
-| Linux kernel ksmbd | SID bounds validation during ACL inheritance and session-aware cleanup on durable-reconnect error paths. | Author of two upstream C fixes, associated with CVE-2026-64138 and CVE-2026-64016. | [SID validation commit](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=69f030cf95488ae1186c72ac8c66fd279664ea7f), [reconnect lifetime commit](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=3515503322f4819277091839eed46b695096aca5) |
+| Linux kernel ksmbd | SID bounds validation during ACL inheritance and session-aware cleanup on durable-reconnect error paths. | Author of two upstream C fixes (CVE-2026-64138 and CVE-2026-64016); the SID-validation fix was also released in Linux 6.6.160 and 6.1.191 stable kernels (Oct 2026). | [SID validation commit](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=69f030cf95488ae1186c72ac8c66fd279664ea7f), [reconnect lifetime commit](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=3515503322f4819277091839eed46b695096aca5), [Linux 6.6.160 release](https://lists.openwall.net/linux-kernel/2026/10/21/903), [Linux 6.1.191 release](https://lists.openwall.net/linux-kernel/2026/10/30/1507) |
 | fuse-overlayfs | Clearing SUID/SGID bits on truncate. | Fix author; incorporated with maintainer adjustments on 2026-06-09. Analyst credit in the related advisory. | [Upstream commit](https://github.com/containers/fuse-overlayfs/commit/97e0d968a782fc259ebde112db1e9b9ff1ad724f), [CVE-2026-52791 advisory](https://github.com/containers/fuse-overlayfs/security/advisories/GHSA-2cc4-p72c-v85h) |
 
 ## Contribution Records
