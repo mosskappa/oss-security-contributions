@@ -2,7 +2,7 @@
 
 **Junyi Liu** · [mosskappa](https://github.com/mosskappa)
 
-Updated: **2026-10-20**.
+Updated: **2026-11-19**.
 
 Published GitHub advisories credit Junyi Liu as **Reporter in nine records,
 Finder in two, and Analyst in three**. This ledger also includes GStreamer
@@ -64,8 +64,11 @@ CVE reporting acknowledgements from Red Hat.
 
 | Project | Public evidence | Contribution |
 |---|---|---|
-| Linux kernel `ksmbd` | Upstream commit `69f030cf95488ae1186c72ac8c66fd279664ea7f`; `CVE-2026-64138` | Authored a C fix validating SID offsets, lengths, and arithmetic bounds before ACL inheritance. |
+| Linux kernel `ksmbd` | Upstream commit `69f030cf95488ae1186c72ac8c66fd279664ea7f`; `CVE-2026-64138` | Authored a C fix validating SID offsets, lengths, and arithmetic bounds before ACL inheritance; the SID fix was released in Linux 6.6.160 (2026-10-21) and 6.1.191 (2026-10-30) stable kernels. |
 | Linux kernel `ksmbd` | Upstream commit `3515503322f4819277091839eed46b695096aca5`; `CVE-2026-64016` | Authored a C fix using session-aware cleanup for a republished file on durable-reconnect error paths. |
 
-Upstream commits and linked Linux CVE records document both fixes and their
-stable backports.
+Upstream commits and Linux CVE records document both fixes. The [Linux 6.6.160](https://lists.openwall.net/linux-kernel/2026/10/21/903)
+and [Linux 6.1.191](https://lists.openwall.net/linux-kernel/2026/10/30/1507) release announcements independently list
+Junyi Liu's SID-validation fix (CVE-2026-64138). These version-specific claims
+do not assert that the separate durable-reconnect fix (CVE-2026-64016) shipped
+in those same releases.
